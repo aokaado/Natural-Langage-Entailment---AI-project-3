@@ -1,0 +1,11 @@
+python eval_rte.py ../data/RTE2_dev.xml ../data/results.txt 
+
+1 a
+Accuracy = 0.5875
+
+1 b
+lemma only
+Accuracy = 0.5363
+lemma and pos
+
+
