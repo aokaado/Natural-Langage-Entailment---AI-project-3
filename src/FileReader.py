@@ -1,7 +1,7 @@
 from xml.etree.cElementTree import iterparse
 
 class FileReader:
-	fields = ["word", "lemma", "pos-tag", "relation"]	
+	fields = ["word", "lemma", "pos-tag"]	
 
 	def __init__(self, inf, abstract = True):
 		self.elems = {}
@@ -38,7 +38,11 @@ class FileReader:
 					if skip:
 						skip = False
 					else:
+						attr["id"] = elem.get("id")
 						sentence.append(attr)
+				elif elem.tag == "relation":
+					attr["parent"] = elem.get("parent")
+					attr[elem.tag] = elem.text.strip("\n\t")
 				elif elem.tag in self.fields and not skip:
 					attr[elem.tag] = elem.text.strip("\n\t")
 					

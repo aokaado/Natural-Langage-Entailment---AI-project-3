@@ -20,7 +20,9 @@ the preprocessing.
 """
 
 # EM - 11/2011
-
+insertion_cost = 1
+deletion_cost = 1
+substition_cost = 1
 
 class Node(list):
 	"""
@@ -30,6 +32,8 @@ class Node(list):
 
 	def __init__(self, label, *children):
 		self.label = label
+		if len(children) == 1 and isinstance(children, (list, tuple)):
+			children = children[0]
 		list.__init__(self, children)
 		
 	def is_leaf(self):
@@ -107,15 +111,15 @@ def unit_costs(node1, node2):
 	"""
 	# insertion cost
 	if node1 is None:
-		return 1
+		return insertion_cost
 	
 	# deletion cost
 	if node2 is None:
-		return 0
+		return deletion_cost
 	
 	# substitution cost
 	if node1.label != node2.label:
-		return 1
+		return substition_cost
 	else:
 		return 0
 
@@ -138,7 +142,6 @@ def postorder(root_node):
 		return [root_node]
 	node = root_node
 	stack = []
-	idx = 0
 	
 	def buildpost(node, stack):
 		if not node.is_leaf():
@@ -147,6 +150,7 @@ def postorder(root_node):
 				stack.append(nodec)
 	buildpost(node, stack)
 	stack.append(root_node)
+	#print stack
 	return stack
 	
 	#
@@ -171,6 +175,8 @@ def leftmost_leaf_descendant_indices(node_list):
 	#
 		
 	indice_list = []
+	for i in range(0, len(node_list)):
+		node_list[i].label = node_list[i].label+"X"+str(i)
 	for node in node_list:
 		cnode = node
 		while not cnode.is_leaf():
@@ -182,6 +188,12 @@ def leftmost_leaf_descendant_indices(node_list):
 			#node_list[i] == cnode is dubious.....
 			if str(node_list[i]) == str(cnode):
 				indice_list.append(i)
+				#print "found ", str(cnode), " at ", i
+	#print node_list
+	for i in range(0, len(node_list)):
+		node_list[i].label = node_list[i].label.split("X")[0]
+	#print node_list
+	#print len(node_list), len(indice_list), indice_list
 	return indice_list
 
 	#
@@ -212,6 +224,7 @@ def key_root_indices(lld_indices):
 			key_roots.append(idx)
 			helper.append(lld_indices[idx])
 	key_roots.reverse()
+
 	return key_roots
 	#
 	#
@@ -316,18 +329,18 @@ if __name__ == "__main__":
 	# Cf. Zhang & Shasha: Fig. 4 and Fig. 8
 	print "a"
 	t1 = Node("f",
-			 Node("d",
-				  Node("a"),
-				  Node("c",
-					   Node("b"))),
-			 Node("e"))
+			Node("d",
+				Node("a"),
+				Node("c", Node("b") , Node("k"), Node("r")) 
+				),
+			Node("e"))
 	
 	t2 = Node("f",
-			  Node("c",
-				   Node("d",
-						Node("a"),
-						Node("b"))),
-			  Node("e"))
+			Node("c",
+				Node("d",
+					Node("a"),
+					Node("b"))),
+			Node("e"))
 
 	print "t1 =", t1	
 	print "t2 =", t2

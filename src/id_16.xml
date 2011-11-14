@@ -1,0 +1,256 @@
+<pair id="16" entailment="NO" task="IR">
+<text>
+	<sentence serial="1">
+		<node id="1">
+			<word>
+				There
+			</word>
+			<lemma>
+				there
+			</lemma>
+			<pos-tag>
+				Subj
+			</pos-tag>
+			<relation parent="3">
+				s
+			</relation>
+		</node>
+		<node id="2">
+			<word>
+				has
+			</word>
+			<lemma>
+				have
+			</lemma>
+			<pos-tag>
+				have
+			</pos-tag>
+			<relation parent="3">
+				have
+			</relation>
+		</node>
+		<node id="3">
+			<word>
+				been
+			</word>
+			<lemma>
+				be
+			</lemma>
+			<pos-tag>
+				VBE
+			</pos-tag>
+			<relation parent="E0">
+				i
+			</relation>
+		</node>
+		<node id="4">
+			<word>
+				a
+			</word>
+			<lemma>
+				a
+			</lemma>
+			<pos-tag>
+				Det
+			</pos-tag>
+			<relation parent="5">
+				det
+			</relation>
+		</node>
+		<node id="5">
+			<word>
+				lot
+			</word>
+			<lemma>
+				lot
+			</lemma>
+			<pos-tag>
+				N
+			</pos-tag>
+			<relation parent="3">
+				pred
+			</relation>
+		</node>
+		<node id="6">
+			<word>
+				of
+			</word>
+			<lemma>
+				of
+			</lemma>
+			<pos-tag>
+				Prep
+			</pos-tag>
+			<relation parent="5">
+				mod
+			</relation>
+		</node>
+		<node id="7">
+			<word>
+				concern
+			</word>
+			<lemma>
+				concern
+			</lemma>
+			<pos-tag>
+				N
+			</pos-tag>
+			<relation parent="6">
+				pcomp-n
+			</relation>
+		</node>
+		<node id="8">
+			<word>
+				over
+			</word>
+			<lemma>
+				over
+			</lemma>
+			<pos-tag>
+				Prep
+			</pos-tag>
+			<relation parent="7">
+				mod
+			</relation>
+		</node>
+		<node id="9">
+			<word>
+				the
+			</word>
+			<lemma>
+				the
+			</lemma>
+			<pos-tag>
+				Det
+			</pos-tag>
+			<relation parent="10">
+				det
+			</relation>
+		</node>
+		<node id="10">
+			<word>
+				rise
+			</word>
+			<lemma>
+				rise
+			</lemma>
+			<pos-tag>
+				N
+			</pos-tag>
+			<relation parent="8">
+				pcomp-n
+			</relation>
+		</node>
+		<node id="11">
+			<word>
+				of
+			</word>
+			<lemma>
+				of
+			</lemma>
+			<pos-tag>
+				Prep
+			</pos-tag>
+			<relation parent="10">
+				mod
+			</relation>
+		</node>
+		<node id="12">
+			<word>
+				drug
+			</word>
+			<lemma>
+				drug
+			</lemma>
+			<pos-tag>
+				U
+			</pos-tag>
+			<relation parent="14">
+				lex-mod
+			</relation>
+		</node>
+		<node id="13">
+			<word>
+				-
+			</word>
+			<lemma>
+				-
+			</lemma>
+			<pos-tag>
+				U
+			</pos-tag>
+			<relation parent="14">
+				lex-mod
+			</relation>
+		</node>
+		<node id="14">
+			<word>
+				resistant
+			</word>
+			<lemma>
+				drug-resistant
+			</lemma>
+			<pos-tag>
+				A
+			</pos-tag>
+			<relation parent="15">
+				mod
+			</relation>
+		</node>
+		<node id="15">
+			<word>
+				bacteria
+			</word>
+			<lemma>
+				bacteria
+			</lemma>
+			<pos-tag>
+				N
+			</pos-tag>
+			<relation parent="11">
+				pcomp-n
+			</relation>
+		</node>
+		<node id="16">
+			<word>
+				.
+			</word>
+			<lemma>
+				.
+			</lemma>
+			<pos-tag>
+				U
+			</pos-tag>
+			<relation parent="E1">
+				punc
+			</relation>
+		</node>
+		<node id="E0">
+			<lemma>
+				fin
+			</lemma>
+			<pos-tag>
+				C
+			</pos-tag>
+		</node>
+		<node id="E1">
+			<pos-tag>
+				U
+			</pos-tag>
+		</node>
+		<node id="E2">
+			<lemma>
+				there
+			</lemma>
+			<pos-tag>
+				Subj
+			</pos-tag>
+			<relation parent="5">
+				subj
+			</relation>
+			<antecedent>
+				1
+			</antecedent>
+		</node>
+	</sentence>
+</text>
