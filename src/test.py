@@ -7,5 +7,9 @@ import lemma_pos as lp
 #printer.write(2, "YES")
 
 
-one = lp.OneB()
-one.printResults()
+#one = lp.OneB()
+# TRUE = lemma, FALSE = lemma && POS
+#one.printResults(False)
+
+data = st.SentenceTree(False)
+print data.getDf("father")
