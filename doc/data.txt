@@ -1,11 +1,53 @@
 python eval_rte.py ../data/RTE2_dev.xml ../data/results.txt 
 
 1 a
-Accuracy = 0.5875
+Threshold = 0.3   Accuracy = 0.5537
+Threshold = 0.35  Accuracy = 05750
+Threshold = 0.38  Accuracy = 0.5825
+Threshold = 0.4   Accuracy = 0.5875 <---- Highest at 0.4
+Threshold = 0.41  Accuracy = 0.5863
+Threshold = 0.42  Accuracy = 0.5850
+Threshold = 0.5   Accuracy = 0.5625
+Threshold = 0.6   Accuracy = 0.5637
+
+1 d (a with weighting)
+Threshold = 0.2   Accuracy = 0.5575
+Threshold = 0.3   Accuracy = 0.5637
+Threshold = 0.325 Accuracy = 0.5637
+Threshold = 0.35  Accuracy = 0.5637
+Threshold = 0.4   Accuracy = 0.5587 <---- Highest at 0.4
+Threshold = 0.5   Accuracy = 0.5513
+Threshold = 0.6   Accuracy = 0.5300
 
 1 b
 lemma only
-Accuracy = 0.5363
+Threshold = 0.3   Accuracy = 0.5012
+Threshold = 0.4   Accuracy = 0.5138
+Threshold = 0.5   Accuracy = 0.5387
+Threshold = 0.6   Accuracy = 0.5787
+Threshold = 0.65  Accuracy = 0.5863
+Threshold = 0.7   Accuracy = 0.6012	<---- Highest at 0.7
+Threshold = 0.75  Accuracy = 0.5962
+Threshold = 0.8   Accuracy = 0.5813
 lemma and pos
+Threshold = 0.3   Accuracy = 0.5012
+Threshold = 0.4   Accuracy = 0.5175
+Threshold = 0.5   Accuracy = 0.5463
+Threshold = 0.6   Accuracy = 0.5900
+Threshold = 0.69  Accuracy = 0.5962
+Threshold = 0.7   Accuracy = 0.5988	<---- Highest at 0.7
+Threshold = 0.71  Accuracy = 0.5975
+Threshold = 0.8   Accuracy = 0.5713
 
+
+1 c
+BLEU
+Threshold = 0.2   Accuracy = 0.6038
+Threshold = 0.21  Accuracy = 0.6100	
+Threshold = 0.22  Accuracy = 0.6112 <---- Highest at 0.22
+Threshold = 0.23  Accuracy = 0.5975
+Threshold = 0.25  Accuracy = 0.6050
+Threshold = 0.3   Accuracy = 0.5863
+Threshold = 0.35  Accuracy = 0.5813
+Threshold = 0.4   Accuracy = 0.5587
 
