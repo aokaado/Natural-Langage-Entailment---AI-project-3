@@ -6,7 +6,8 @@ import eval_rte
 import SentenceTree as st
 
 class WordMatcher:
-	threshHold = 0.3	
+	threshHold = 0.4
+	weightedThreshHold = 0.8
 	result = -1
 	pairs = {}
 	weight = False
@@ -26,7 +27,10 @@ class WordMatcher:
 				currentPair = p.Pair()
 		if weighting:
 			self.weight = True
+			self.thresh = self.weightedThreshHold
 			self.weighter = st.SentenceTree()
+		else:
+			self.thresh = self.threshHold
 		
 	def match(self, i): # i is id of pair
 		return self.simpleMatch(i)
@@ -36,10 +40,13 @@ class WordMatcher:
 		currentPair = self.pairs[i]
 		hyplen = 0.0
 		for word in currentPair.hypothesis:
-			hyplen += 1.0*self.weighter.getDf(word)
+			if self.weight:
+				hyplen += self.weighter.getDf(word)
+			else:
+				hyplen +=1.0
 			if word in currentPair.text:
 					if self.weight:
-						occ +=1.0*self.weighter.getDf(word)
+						occ +=self.weighter.getDf(word)
 					else:
 						occ +=1.0
 		#print "occ: ", occ, "len: ", hyplen
@@ -49,7 +56,7 @@ class WordMatcher:
 		currentPair = self.pairs[i]
 		if currentPair.result < 0:
 			self.match(i)
-		return "YES" if currentPair.result >= self.threshHold else "NO"
+		return "YES" if currentPair.result >= self.thresh else "NO"
 		
 	def verbose(self, i): #i is id of pair
 		#print "in verbose: ", self.pairs[i].text, ", ", self.pairs[i].result, ", ", self.pairs[i].hypothesis 

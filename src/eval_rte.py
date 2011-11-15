@@ -20,9 +20,13 @@ def evaluate(ref_fname, pred_fname):
     
     correct = [ id for id, label in ref_id2label.iteritems()
                 if pred_id2label[id] == label ]
-    
+    yes = [ id for id, label in ref_id2label.iteritems()
+                if pred_id2label[id] == label and label == "YES" ]
+    no = [ id for id, label in ref_id2label.iteritems()
+                if pred_id2label[id] == label and label == "NO" ]
+                
     accuracy = len(correct) / float(len(ref_id2label))
-    
+    print "yes ", len(yes) / float(len(ref_id2label)/2), "no ", len(no) / float(len(ref_id2label)/2)
     return accuracy
     
 

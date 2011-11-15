@@ -24,13 +24,10 @@ class FileReader:
 					attr = {}
 				elif elem.tag == "text" or elem.tag == "hypothesis":
 					sentence = []
-					
+				elif elem.tag == "sentence":
+					sid = "X"+str(elem.get("serial"))
+				
 			if event == "end":
-				"""
-				#end early during testing
-				if elem.tag == "pair" and self.pairs > 1:
-					break
-				"""
 				
 				if elem.tag == "text" or elem.tag == "hypothesis":
 					self.elems[cid].append(sentence)
@@ -38,10 +35,10 @@ class FileReader:
 					if skip:
 						skip = False
 					else:
-						attr["id"] = elem.get("id")
+						attr["id"] = elem.get("id")+sid
 						sentence.append(attr)
 				elif elem.tag == "relation":
-					attr["parent"] = elem.get("parent")
+					attr["parent"] = elem.get("parent")+sid
 					attr[elem.tag] = elem.text.strip("\n\t")
 				elif elem.tag in self.fields and not skip:
 					attr[elem.tag] = elem.text.strip("\n\t")
