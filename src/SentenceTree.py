@@ -43,6 +43,24 @@ class SentenceTree:
 			exit()
 		return [ self.get(self.idx, 1, i, attr) for i in range(0, self.hypNodes())]
 	
+	def getTextAttrD(self, attr):
+		res = {}
+		if attr not in self.attributes:
+			print "wrong attribute selected", attr
+			exit()
+		for i in range(0, self.textNodes()):
+			res[i] = self.get(self.idx, 0, i, attr)
+		return res
+		
+	def getHypAttrD(self, attr):
+		res = {}
+		if attr not in self.attributes:
+			print "wrong attribute selected", attr
+			exit()
+		for i in range(0, self.hypNodes()):
+			res[i] = self.get(self.idx, 1, i, attr)
+		return res
+	
 	def getNGramText(self, n):
 		words = self.getTextAttr("word")
 		return [[words[k] for k in range(j, j+n)] for j in range(0, len(words)-n+1)]

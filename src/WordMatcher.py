@@ -65,7 +65,10 @@ class WordMatcher:
 		#print "%.2f" % (self.pairs[i].result*100), "% is a", self.isGood(i)
 
 	def getFeatures(self):
-		return [self.pairs[i].result for i in range(1, len(self.pairs)+1)]
+		res = {}
+		for i in range(1, len(self.pairs)+1):
+			res[i] = self.pairs[i].result
+		return res
 
 if __name__ == "__main__":
 	#test

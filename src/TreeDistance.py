@@ -86,4 +86,5 @@ if __name__ == "__main__":
 	#tdi.getTrees()
 	tdi.matchTrees(True)
 	#tdi.printResults()
-	tdi.printall()
+	#tdi.printall()
+	print tdi.result

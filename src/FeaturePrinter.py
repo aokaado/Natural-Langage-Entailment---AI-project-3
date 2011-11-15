@@ -54,27 +54,39 @@ class FeaturePrinter (object):
 		print "retrieving entailments"		
 		self.entailment = {}
 		for event, elem in iterparse(self.learnerfile):
-		    if elem.tag == "pair":
-		        self.entailment[elem.get("id")] = elem.get("entailment")
-		
+			if elem.tag == "pair":
+				self.entailment[elem.get("id")] = elem.get("entailment")
+		print self.entailment
+				
 	def createFeatureFile(self):
 		f = open("features.tab", 'w')
 		f.write("entailment\twmf\tlmf\tlpf\tb2f\tb3f\tb4f\ttdf\n")
 		f.write("d\tc\tc\tc\tc\tc\tc\tc\n")
 		f.write("class\t\t\t\t\t\t\t\n")
 		
-		for i in range(1, len(self.wmf)+1):
-			f.write("\t"+self.wmf[i]+"\t"+self.lmf[i]+"\t"+self.lpf[i]+"\t"+self.b2f[i]+"\t"+self.b3f[i]+"\t"+self.b4f[i]+"\t"+self.tdf[i]+"\n")
-			#self.entailment[i]+	
+		for i in range(1, len(self.entailment)+1):
+			bufferline = self.entailment[str(i)]+"\t"
+			bufferline += str(self.wmf[i])+"\t"
+			bufferline += str(self.lmf[i])+"\t"
+			bufferline += str(self.lpf[i])+"\t"
+			bufferline += str(self.b2f[i])+"\t"
+			bufferline += str(self.b3f[i])+"\t"
+			bufferline += str(self.b4f[i])+"\t"
+			bufferline += str(self.tdf[i])+"\n"
+			f.write(bufferline)
+	
 		f.close()	
 
 if __name__ == "__main__":
 	featureprinter = FeaturePrinter()
+	
 	featureprinter.createWMFeatures()
 	featureprinter.createLFeatures()
 	featureprinter.createLPFeatures()
 	featureprinter.createBleuFeatures()
 	featureprinter.createTreeDistFeatures()
-	#print len(featureprinter.wmf), len(featureprinter.lmf), len(featureprinter.lpf), len(featureprinter.b2f), len(featureprinter.b3f), len(featureprinter.b4f), len(featureprinter.tdf)
+	
 	featureprinter.getEntailments()
 	featureprinter.createFeatureFile()
+	
+	#print len(featureprinter.wmf), len(featureprinter.lmf), len(featureprinter.lpf), len(featureprinter.b2f), len(featureprinter.b3f), len(featureprinter.b4f), len(featureprinter.tdf)

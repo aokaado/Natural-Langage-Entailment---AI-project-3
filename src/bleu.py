@@ -51,5 +51,6 @@ class Bleu:
 
 if __name__ == "__main__":	
 	b = Bleu()
-	b.printResults()
+	print b.getBleu(2)
+	#b.printResults()
 

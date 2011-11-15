@@ -18,18 +18,23 @@ class OneB:
 		for i in range(1, self.data.pairs+1):
 			self.data.setCurrentId(i)
 			count = 0
-			tlemmas = self.data.getTextAttr("lemma")
-			tpos = self.data.getTextAttr("pos-tag")
-			hlemmas = self.data.getHypAttr("lemma")
-			hpos = self.data.getHypAttr("pos-tag")
+			tot = 0
+			tlemmas = self.data.getTextAttrD("lemma")
+			tpos = self.data.getTextAttrD("pos-tag")
+			hlemmas = self.data.getHypAttrD("lemma")
+			hpos = self.data.getHypAttrD("pos-tag")
 			for j in range(1, self.data.textNodes()):
-				t = tlemmas[j]
-				t2 = tpos[j]
-				if t in hlemmas and t2 in hpos:
-					count += 1
+				if hlemmas.has_key(j) and hpos.has_key(j):
+					h = hlemmas[j]
+					h2 = hpos[j]
+					if h=="" or h2 =="":
+						continue
+					tot += 1
+					if h in tlemmas and h2 in tpos:
+						count += 1
 					
-			self.lemmaPosResult[i] = "YES" if count/len(hlemmas) > self.lemmaPosThresh else "NO"
-			lemmap[i] = count/len(hlemmas)
+			self.lemmaPosResult[i] = "YES" if count/tot > self.lemmaPosThresh else "NO"
+			lemmap[i] = count/tot
 		return lemmap
 	
 	def matchLemma(self):
@@ -39,8 +44,8 @@ class OneB:
 			count = 0
 			tlemmas = self.data.getTextAttr("lemma")
 			hlemmas = self.data.getHypAttr("lemma")
-			for t in tlemmas:
-				if t in hlemmas:
+			for h in hlemmas:
+				if h in tlemmas:
 					count += 1
 					
 			self.lemmaResult[i] = "YES" if count/len(hlemmas) > self.lemmaThresh else "NO"
