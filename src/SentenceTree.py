@@ -10,8 +10,8 @@ class SentenceTree:
 	node = 0
 	df = {}
 	
-	def __init__(self, abstract = True):
-		xmltree = fr.FileReader("../data/RTE2_dev.preprocessed.xml", abstract)
+	def __init__(self, inputfile = "../data/RTE2_dev.preprocessed.xml", abstract = True):
+		xmltree = fr.FileReader(inputfile, abstract)
 		self.pairs = xmltree.pairs
 		self.data = xmltree.elems
 		self.texts = None

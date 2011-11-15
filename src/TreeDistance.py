@@ -3,37 +3,15 @@ import treeEdit as td
 import SentenceTree as st
 import ResultPrinter as rp
 
-def weighter(node1, node2):
-	"""
-	Defines unit cost for edit operation on pair of nodes,
-	i.e. cost of insertion, deletion, substitution are all 1
-	"""
-	# insertion cost
-	if node1 is None:
-		if node2.label in ["ABSTRACT", "ROOT"]:
-			return 0
-		#print "label ", node2.label, tdi.data.getDf(node2.label, "lemma")
-		return tdi.data.getDf(node2.label, "lemma")
-
-	# deletion cost
-	if node2 is None:
-		return 0
-
-	# substitution cost
-	if node1.label != node2.label:
-		#if node1.label in ["ABSTRACT", "ROOT"] and node2.label in ["ABSTRACT", "ROOT"]:
-		#	return 0
-		#return (tdi.data.getDf(node1.label, "lemma")+tdi.data.getDf(node2.label, "lemma"))/2
-		return 1
-	return 0
-
 class TreeDistance:
 	
+	#best threshhold without weighting
 	#thresh = 0.625
+	
 	thresh = 0.425
 	
-	def __init__(self):
-		self.data = st.SentenceTree(True)
+	def __init__(self, learnerfile = "../data/RTE2_dev.preprocessed.xml"):
+		self.data = st.SentenceTree(learnerfile, True)
 		self.result = {}
 		
 	def getTrees(self):
@@ -50,6 +28,26 @@ class TreeDistance:
 		print "distance ", dist, "normalisation ", norm, " fin ", (norm-dist)/norm
 
 	def matchTrees(self, weight = False ):
+		def weighter(node1, node2):
+			# insertion cost
+			if node1 is None:
+				if node2.label in ["ABSTRACT", "ROOT"]:
+					return 0
+				#print "label ", node2.label, tdi.data.getDf(node2.label, "lemma")
+				return self.data.getDf(node2.label, "lemma")
+
+			# deletion cost
+			if node2 is None:
+				return 0
+
+			# substitution cost
+			if node1.label != node2.label:
+				#if node1.label in ["ABSTRACT", "ROOT"] and node2.label in ["ABSTRACT", "ROOT"]:
+				#	return 0
+				#return (tdi.data.getDf(node1.label, "lemma")+tdi.data.getDf(node2.label, "lemma"))/2
+				return 1
+			return 0
+			
 		for i in range(1, self.data.pairs+1):
 			if i % 8 == 0:
 				print i*100/800,"%"
@@ -65,18 +63,27 @@ class TreeDistance:
 				dist = td.distance(tTree, hTree)
 				norm = td.distance(empty, hTree)
 			
-			self.result[i] = "YES" if (norm-dist)/norm > self.thresh else "NO"
-			
-	
+			#self.result[i] = "YES" if (norm-dist)/norm > self.thresh else "NO"
+			self.result[i] = (norm-dist)/norm
+		return self.result
+
+	def printall(self):
+		for i in range(101):
+			printer = rp.ResultPrinter(str(i))
+			for key in self.result.keys():
+				printer.write(key, "YES" if self.result[key] > i/100 else "NO")
+				
 	def printResults(self):
 		if not self.result:
 			self.matchTrees()
 		printer = rp.ResultPrinter()
 		for key in self.result.keys():
-			printer.write(key, self.result[key])
+			printer.write(key, "YES" if self.result[key] > self.thresh else "NO")
 			
-td.deletion_cost = 0
-tdi = TreeDistance()
-#tdi.getTrees()
-tdi.matchTrees(True)
-tdi.printResults()
+if __name__ == "__main__":
+	td.deletion_cost = 0
+	tdi = TreeDistance()
+	#tdi.getTrees()
+	tdi.matchTrees(True)
+	#tdi.printResults()
+	tdi.printall()

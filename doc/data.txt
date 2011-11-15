@@ -13,9 +13,9 @@ Threshold = 0.6   Accuracy = 0.5637
 1 d (a with weighting)
 Threshold = 0.2   Accuracy = 0.5575
 Threshold = 0.3   Accuracy = 0.5637
-Threshold = 0.325 Accuracy = 0.5637
+Threshold = 0.325 Accuracy = 0.5637  <---- Highest at 0.325
 Threshold = 0.35  Accuracy = 0.5637
-Threshold = 0.4   Accuracy = 0.5587 <---- Highest at 0.4
+Threshold = 0.4   Accuracy = 0.5587
 Threshold = 0.5   Accuracy = 0.5513
 Threshold = 0.6   Accuracy = 0.5300
 
@@ -50,4 +50,29 @@ Threshold = 0.25  Accuracy = 0.6050
 Threshold = 0.3   Accuracy = 0.5863
 Threshold = 0.35  Accuracy = 0.5813
 Threshold = 0.4   Accuracy = 0.5587
+
+
+2 b Tree distance without weighting
+
+Threshold = 0.3   Accuracy = 0.
+Threshold = 0.55  Accuracy = 0.5863
+Threshold = 0.6   Accuracy = 0.5950
+Threshold = 0.61  Accuracy = 0.5950
+Threshold = 0.625 Accuracy = 0.6012 <---- Highes at 0.625
+Threshold = 0.63  Accuracy = 0.6012
+Threshold = 0.64  Accuracy = 0.5925
+Threshold = 0.65  Accuracy = 0.5950
+Threshold = 0.7   Accuracy = 0.5737
+Threshold = 0.75  Accuracy = 0.5463
+Threshold = 0.8   Accuracy = 0.5312
+
+2 c Tree Distance with  weighting
+
+Threshold = 0.4   Accuracy = 0.6038
+Threshold = 0.425 Accuracy = 0.6150 <--- HIGHEST EVAH at 0.425
+Threshold = 0.45  Accuracy = 0.6025
+Threshold = 0.625 Accuracy = 0.6000
+Threshold = 0.65  Accuracy = 0.5950
+
+
 

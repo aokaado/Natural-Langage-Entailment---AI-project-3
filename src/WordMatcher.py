@@ -7,7 +7,7 @@ import SentenceTree as st
 
 class WordMatcher:
 	threshHold = 0.4
-	weightedThreshHold = 0.8
+	weightedThreshHold = 0.325
 	result = -1
 	pairs = {}
 	weight = False
@@ -64,16 +64,16 @@ class WordMatcher:
 			self.match(i)
 		#print "%.2f" % (self.pairs[i].result*100), "% is a", self.isGood(i)
 
+	def getFeatures(self):
+		return [self.pairs[i].result for i in range(1, len(self.pairs)+1)]
 
-#test
-# if weighting applied, add True, else False or nothing
-wordtest = WordMatcher("../data/RTE2_dev.xml", True)
-resultP = rp.ResultPrinter()
-for i in range(1, len(wordtest.pairs)+1):
-	if i % 32 == 0:
-		print i*100/800,"%"
-	wordtest.verbose(i)
-	resultP.write(i, wordtest.isGood(i))
-
-	
-	
+if __name__ == "__main__":
+	#test
+	# if weighting applied, add True, else False or nothing
+	wordtest = WordMatcher("../data/RTE2_dev.xml", True)
+	resultP = rp.ResultPrinter()
+	for i in range(1, len(wordtest.pairs)+1):
+		if i % 32 == 0:
+			print i*100/800,"%"
+		wordtest.verbose(i)
+		resultP.write(i, wordtest.isGood(i))
