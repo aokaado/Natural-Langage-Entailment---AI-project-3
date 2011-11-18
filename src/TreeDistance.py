@@ -47,6 +47,29 @@ class TreeDistance:
 				#return (tdi.data.getDf(node1.label, "lemma")+tdi.data.getDf(node2.label, "lemma"))/2
 				return 1
 			return 0
+		
+		#PART IV
+		def weighterSyn(node1, node2):
+			# insertion cost
+			if node1 is None:
+				if node2.label in ["ABSTRACT", "ROOT"]:
+					return 0
+				#print "label ", node2.label, tdi.data.getDf(node2.label, "lemma")
+				return self.data.getDf(node2.label, "lemma")
+
+			# deletion cost
+			if node2 is None:
+				return 0
+
+			# substitution cost
+			if node1.label != node2.label:
+				#if node1.label in ["ABSTRACT", "ROOT"] and node2.label in ["ABSTRACT", "ROOT"]:
+				#	return 0
+				#return (tdi.data.getDf(node1.label, "lemma")+tdi.data.getDf(node2.label, "lemma"))/2
+				return 1
+			return 0
+			
+		
 			
 		for i in range(1, self.data.pairs+1):
 			if i % 8 == 0:
