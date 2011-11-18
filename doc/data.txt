@@ -21,23 +21,22 @@ Threshold = 0.6   Accuracy = 0.5300
 
 1 b
 lemma only
-Threshold = 0.3   Accuracy = 0.5012
-Threshold = 0.4   Accuracy = 0.5138
-Threshold = 0.5   Accuracy = 0.5387
-Threshold = 0.6   Accuracy = 0.5787
-Threshold = 0.65  Accuracy = 0.5863
-Threshold = 0.7   Accuracy = 0.6012	<---- Highest at 0.7
-Threshold = 0.75  Accuracy = 0.5962
-Threshold = 0.8   Accuracy = 0.5813
+Threshold = 0.5   Accuracy = 0.5975
+Threshold = 0.6   Accuracy = 0.6175
+Threshold = 0.65  Accuracy = 0.6212 <---- Highest at 0.65
+Threshold = 0.7   Accuracy = 0.6188	
+Threshold = 0.75  Accuracy = 0.5925
+Threshold = 0.8   Accuracy = 0.5863
 lemma and pos
-Threshold = 0.3   Accuracy = 0.5012
-Threshold = 0.4   Accuracy = 0.5175
-Threshold = 0.5   Accuracy = 0.5463
-Threshold = 0.6   Accuracy = 0.5900
-Threshold = 0.69  Accuracy = 0.5962
-Threshold = 0.7   Accuracy = 0.5988	<---- Highest at 0.7
-Threshold = 0.71  Accuracy = 0.5975
-Threshold = 0.8   Accuracy = 0.5713
+Threshold = 0.3   Accuracy = 0.
+Threshold = 0.4   Accuracy = 0.
+Threshold = 0.5   Accuracy = 0.5887
+Threshold = 0.6   Accuracy = 0.6150
+Threshold = 0.625 Accuracy = 0.6212  <---- Highest at 0.625  
+Threshold = 0.65  Accuracy = 0.6150
+Threshold = 0.7   Accuracy = 0.6075	
+Threshold = 0.75  Accuracy = 0.5863
+Threshold = 0.8   Accuracy = 0.
 
 
 1 c

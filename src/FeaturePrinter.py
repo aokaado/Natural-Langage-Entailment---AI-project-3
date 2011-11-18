@@ -56,7 +56,6 @@ class FeaturePrinter (object):
 		for event, elem in iterparse(self.learnerfile):
 			if elem.tag == "pair":
 				self.entailment[elem.get("id")] = elem.get("entailment")
-		print self.entailment
 				
 	def createFeatureFile(self):
 		f = open("features.tab", 'w')
@@ -77,7 +76,7 @@ class FeaturePrinter (object):
 	
 		f.close()	
 
-if __name__ == "__main__":
+def createFile():
 	featureprinter = FeaturePrinter()
 	
 	featureprinter.createWMFeatures()
@@ -89,4 +88,5 @@ if __name__ == "__main__":
 	featureprinter.getEntailments()
 	featureprinter.createFeatureFile()
 	
-	#print len(featureprinter.wmf), len(featureprinter.lmf), len(featureprinter.lpf), len(featureprinter.b2f), len(featureprinter.b3f), len(featureprinter.b4f), len(featureprinter.tdf)
+if __name__ == "__main__":
+	createFile()

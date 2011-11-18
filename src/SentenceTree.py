@@ -48,6 +48,7 @@ class SentenceTree:
 		if attr not in self.attributes:
 			print "wrong attribute selected", attr
 			exit()
+
 		for i in range(0, self.textNodes()):
 			res[i] = self.get(self.idx, 0, i, attr)
 		return res
