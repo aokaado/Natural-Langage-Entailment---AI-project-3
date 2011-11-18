@@ -7,11 +7,14 @@ class OneB:
 
 	lemmaThresh = 0.7
 	lemmaPosThresh = 0.625
-	lemmaSynThresh = 0.73
+	lemmaSynThresh = 0.63
+	
 	
 	lemmaResult = {}
 	lemmaPosResult = {}
 	lemmaSynResult = {}
+	
+	lemmaSynResultA = {}
 	
 	def __init__(self, learnerfile = "../data/RTE2_dev.preprocessed.xml"):
 		self.data = st.SentenceTree(learnerfile, False)
@@ -61,38 +64,109 @@ class OneB:
 	# Part IV		
 	def matchLemmaSyn(self):
 		lemma = {}
+		postags = ["s", "n", "v", "a", "r"]
 		for i in range(1, self.data.pairs+1):
 			if i % 32 == 0:
 				print i*100/800,"%"
 			self.data.setCurrentId(i)
 			count = 0
-			tlemmas = self.data.getTextAttr("lemma")
-			tSlemmas = [syn.Syn(t) for t in tlemmas]
+			tlemmas = self.data.getTextAttrD("lemma")
+			tpos = self.data.getTextAttrD("pos-tag")
+			tSlemmas = {}
+			for key in tlemmas.keys():
+				if tpos.has_key(key):
+					tSlemmas[key] = syn.Syn(tlemmas[key], tpos[key].lower()) if tpos[key].lower() in postags else syn.Syn(tlemmas[key])
+			
 			#print tSlemmas
-			hlemmas = self.data.getHypAttr("lemma")
+			hlemmas = self.data.getHypAttrD("lemma")
+			hpos = self.data.getHypAttrD("pos-tag")
+			hSlemmas = {}
+			for key in hlemmas.keys():
+				if hpos.has_key(key):
+					hSlemmas[key] = syn.Syn(hlemmas[key], hpos[key].lower()) if hpos[key].lower() in postags else syn.Syn(hlemmas[key])
+			
 			tot = 0
-			for h in hlemmas:
-				if h in tlemmas:
+			for key in hlemmas.keys():
+				if hlemmas[key] in tlemmas:
 					tot += 1
 					count += 1
 					#print "found xml lemma match"
 				else:
-					s = syn.Syn(h)
+					s = hSlemmas[key]
 					if len(s.syns) > 0:
 						tot += 1
 						#print s.syns
-						if syn.Syn(h) in tSlemmas:
-							#print "found synonom match"
-							count += 1
-						#--------------Antonym
-						if s.lemmas and tSlemmas
-						s.lemmas[i].antonyms in 
-						#--------------Antonym
+						for key2 in tSlemmas.keys():
+							t = tSlemmas[key2]
+							connection = s.findLemmaConnection(t)
+							if connection == 1 or connection == -1:
+								count += connection
+								break
+					
+					
 					
 			self.lemmaSynResult[i] = "YES" if count/tot > self.lemmaSynThresh else "NO"
-			lemma[i] = count/tot
+			self.lemmaSynResultA[i] = count/tot
 			#print lemma[i]
-		return lemma
+		return self.lemmaSynResultA[i]
+
+	# Part IV		
+	def matchLemmaSyn2(self):
+		lemma = {}
+		postags = ["s", "n", "v", "a", "r"]
+		for i in range(1, self.data.pairs+1):
+			if i % 32 == 0:
+				print i*100/800,"%"
+			self.data.setCurrentId(i)
+			count = 0
+			tlemmas = self.data.getTextAttrD("lemma")
+			tpos = self.data.getTextAttrD("pos-tag")
+			tSlemmas = {}
+			for key in tlemmas.keys():
+				if tpos.has_key(key):
+					tSlemmas[key] = syn.Syn(tlemmas[key], tpos[key].lower()) if tpos[key].lower() in postags else syn.Syn(tlemmas[key])
+			
+			#print tSlemmas
+			hlemmas = self.data.getHypAttrD("lemma")
+			hpos = self.data.getHypAttrD("pos-tag")
+			hSlemmas = {}
+			for key in hlemmas.keys():
+				if hpos.has_key(key):
+					hSlemmas[key] = syn.Syn(hlemmas[key], hpos[key].lower()) if hpos[key].lower() in postags else syn.Syn(hlemmas[key])
+			
+			tot = 0
+			for key in hlemmas.keys():
+				foundKey = False
+				for key2 in tlemmas.keys():
+					if hlemmas[key] == tlemmas[key2]:
+						tot += 1
+						count += 1
+						#print "found xml lemma match"
+						del tlemmas[key2]
+						del tSlemmas[key2]
+						foundKey = True
+						break
+					
+				if not foundKey:
+					s = hSlemmas[key]
+					if len(s.syns) > 0:
+						tot += 1
+						#print s.syns
+						for key2 in tSlemmas.keys():
+							t = tSlemmas[key2]
+							connection = s.findLemmaConnection(t)
+							if connection == 1 or connection == -1:
+								count += connection
+								del tSlemmas[key2]
+								del tlemmas[key2]
+								break
+					
+					
+					
+			self.lemmaSynResult[i] = "YES" if count/tot > self.lemmaSynThresh else "NO"
+			self.lemmaSynResultA[i] = count/tot
+			#print lemma[i]
+		return self.lemmaSynResultA[i]
 		
 	def printResults(self, lemma = 0):
 		if lemma == 0:
@@ -114,8 +188,14 @@ class OneB:
 			for key in self.lemmaSynResult.keys():
 				printer.write(key, self.lemmaSynResult[key])
 		
+	def printall(self):
+		for i in range(101):
+			printer = rp.ResultPrinter(str(i))
+			for key in self.lemmaSynResult.keys():
+				printer.write(key, "YES" if self.lemmaSynResultA[key] > i/100 else "NO")
 
 if __name__ == "__main__":
 	b = OneB()
 	#print b.matchLemmaPos()
-	b.printResults(2)
+	b.matchLemmaSyn2()
+	b.printall()
