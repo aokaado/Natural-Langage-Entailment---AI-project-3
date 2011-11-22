@@ -2,7 +2,7 @@ python eval_rte.py ../data/RTE2_dev.xml ../data/results.txt
 
 1 a
 Threshold = 0.3   Accuracy = 0.5537
-Threshold = 0.35  Accuracy = 05750
+Threshold = 0.35  Accuracy = 0.5750
 Threshold = 0.38  Accuracy = 0.5825
 Threshold = 0.4   Accuracy = 0.5875 <---- Highest at 0.4
 Threshold = 0.41  Accuracy = 0.5863
@@ -21,26 +21,41 @@ Threshold = 0.6   Accuracy = 0.5300
 
 1 b
 lemma only
-Threshold = 0.5   Accuracy = 0.5975
-Threshold = 0.6   Accuracy = 0.6175
-Threshold = 0.65  Accuracy = 0.6212 <---- Highest at 0.65
-Threshold = 0.7   Accuracy = 0.6188	
-Threshold = 0.75  Accuracy = 0.5925
-Threshold = 0.8   Accuracy = 0.5863
+ThreshHolds
+0.59 Accuracy = 0.6125
+0.60 Accuracy = 0.6175
+0.61 Accuracy = 0.6175
+0.62 Accuracy = 0.6188
+0.63 Accuracy = 0.6250 <---- Highest at 0.63
+0.64 Accuracy = 0.6225
+0.65 Accuracy = 0.6212
+0.66 Accuracy = 0.6212
+0.67 Accuracy = 0.6212
+0.68 Accuracy = 0.6212
+0.69 Accuracy = 0.6188
+0.70 Accuracy = 0.6188
+0.71 Accuracy = 0.6188
+0.72 Accuracy = 0.5988
+
 lemma and pos
-Threshold = 0.3   Accuracy = 0.
-Threshold = 0.4   Accuracy = 0.
-Threshold = 0.5   Accuracy = 0.5887
-Threshold = 0.6   Accuracy = 0.6150
-Threshold = 0.625 Accuracy = 0.6212  <---- Highest at 0.625  
-Threshold = 0.65  Accuracy = 0.6150
-Threshold = 0.7   Accuracy = 0.6075	
-Threshold = 0.75  Accuracy = 0.5863
-Threshold = 0.8   Accuracy = 0.
+ThreshHold
+0.58 Accuracy = 0.6025
+0.59 Accuracy = 0.6050
+0.60 Accuracy = 0.6150
+0.61 Accuracy = 0.6150
+0.62 Accuracy = 0.6162
+0.63 Accuracy = 0.6225 <---- Highest at 0.63
+0.64 Accuracy = 0.6188
+0.65 Accuracy = 0.6150
+0.66 Accuracy = 0.6125
+0.67 Accuracy = 0.6100
+0.68 Accuracy = 0.6100
+
 
 
 1 c
 BLEU
+n = 1 to 4
 Threshold = 0.2   Accuracy = 0.6038
 Threshold = 0.21  Accuracy = 0.6100	
 Threshold = 0.22  Accuracy = 0.6112 <---- Highest at 0.22
@@ -50,6 +65,25 @@ Threshold = 0.3   Accuracy = 0.5863
 Threshold = 0.35  Accuracy = 0.5813
 Threshold = 0.4   Accuracy = 0.5587
 
+n = 1 to 2
+0.34 Accuracy = 0.6075
+0.35 Accuracy = 0.6200
+0.36 Accuracy = 0.6200
+0.37 Accuracy = 0.6212
+0.38 Accuracy = 0.6188
+0.39 Accuracy = 0.6162
+0.40 Accuracy = 0.6150
+0.41 Accuracy = 0.6188
+0.42 Accuracy = 0.6275
+0.43 Accuracy = 0.6275
+0.44 Accuracy = 0.6338 <---- Highest at 0.44 
+0.45 Accuracy = 0.6238
+0.46 Accuracy = 0.6212
+0.47 Accuracy = 0.6175
+0.48 Accuracy = 0.6162
+0.49 Accuracy = 0.6150
+0.50 Accuracy = 0.6162
+0.51 Accuracy = 0.6112
 
 2 b Tree distance without weighting
 

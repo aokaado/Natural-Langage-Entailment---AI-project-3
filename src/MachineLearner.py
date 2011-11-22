@@ -24,7 +24,7 @@ class CrossVal:
 
 		train = data.select(rndind, 0)
 		test = data.select(rndind, 1)
-		knn = orange.kNNLearner(train, self.k)
+		knn = orange.kNNLearner(train, k = self.k, rankWeight = True)
 		
 		occ = 0
 		for inp in test:
@@ -34,7 +34,7 @@ class CrossVal:
 		self.acc.append(ca)
 		
 	def run_kNN(self):
-		for i in range(0, self.folds):
+		for i in range(0, 50 * self.folds):
 			cv.knn()
 			
 	def CA(self):
@@ -52,12 +52,12 @@ cv.run_kNN()
 cv.printCA()
 
 
-# Builtin ClossValidator, with several classifiers
+# Builtin ClossValidator, with several classifiers, only used for testing early on
 if False:
 	# set up the learners
 	bayes = orange.BayesLearner()
 	tree = orngTree.TreeLearner(mForPruning=2)
-	knn = orange.kNNLearner(k=150)
+	knn = orange.kNNLearner(k=k)
 	bayes.name = "bayes"
 	tree.name = "tree"
 	knn.name = "knn"

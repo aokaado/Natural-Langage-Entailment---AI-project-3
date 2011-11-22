@@ -2,12 +2,13 @@ from __future__ import division
 import treeEdit as td
 import SentenceTree as st
 import ResultPrinter as rp
+import syn
 
 class TreeDistance:
 	
 	#best threshhold without weighting
 	#thresh = 0.625
-	
+	# and with
 	thresh = 0.425
 	
 	def __init__(self, learnerfile = "../data/RTE2_dev.preprocessed.xml"):
@@ -55,6 +56,7 @@ class TreeDistance:
 				if node2.label in ["ABSTRACT", "ROOT"]:
 					return 0
 				#print "label ", node2.label, tdi.data.getDf(node2.label, "lemma")
+				
 				return self.data.getDf(node2.label, "lemma")
 
 			# deletion cost
@@ -66,7 +68,9 @@ class TreeDistance:
 				#if node1.label in ["ABSTRACT", "ROOT"] and node2.label in ["ABSTRACT", "ROOT"]:
 				#	return 0
 				#return (tdi.data.getDf(node1.label, "lemma")+tdi.data.getDf(node2.label, "lemma"))/2
-				return 1
+				node1Syn = syn.Syn(node1.label)
+				node2Syn = syn.Syn(node2.label)
+				return 1-node1Syn.findLemmaConnection(node2Syn)
 			return 0
 			
 		
@@ -80,8 +84,8 @@ class TreeDistance:
 			empty = td.Node("EMPTY")
 
 			if weight:
-				dist = td.distance(tTree, hTree, weighter)
-				norm = td.distance(empty, hTree, weighter)
+				dist = td.distance(tTree, hTree, weighterSyn)
+				norm = td.distance(empty, hTree, weighterSyn)
 			else:
 				dist = td.distance(tTree, hTree)
 				norm = td.distance(empty, hTree)
@@ -109,5 +113,5 @@ if __name__ == "__main__":
 	#tdi.getTrees()
 	tdi.matchTrees(True)
 	#tdi.printResults()
-	#tdi.printall()
-	print tdi.result
+	tdi.printall()
+	#print tdi.result

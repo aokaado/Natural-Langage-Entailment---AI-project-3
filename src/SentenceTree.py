@@ -63,11 +63,11 @@ class SentenceTree:
 		return res
 	
 	def getNGramText(self, n):
-		words = self.getTextAttr("word")
+		words = self.getTextAttr("lemma")
 		return [[words[k] for k in range(j, j+n)] for j in range(0, len(words)-n+1)]
 		
 	def getNGramHyp(self, n):
-		words = self.getHypAttr("word")
+		words = self.getHypAttr("lemma")
 		return [[words[k] for k in range(j, j+n)] for j in range(0, len(words)-n+1)]
 	
 	def createCollection(self, attr):

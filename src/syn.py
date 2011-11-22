@@ -25,7 +25,7 @@ class Syn:
 			for lemma1 in self.lemmas:
 				for lemma2 in other.lemmas:
 					#if antonym
-					if lemma2 in lemma1.antonyms():
+					if lemma2 in lemma1.antonyms() or lemma1 in lemma2.antonyms():
 						return -1
 		
 		for syn in self.syns:
